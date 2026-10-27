@@ -1,0 +1,635 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مغامرات بهلاء والحمراء</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: #f4f7f5;
+  color: #19352e;
+}
+
+header {
+  background: #123d35;
+  color: white;
+  padding: 22px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+header p {
+  margin: 8px 0 0;
+  color: #c9e5d8;
+  font-size: 13px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: 14px;
+}
+
+.hero {
+  padding: 65px 7%;
+  color: white;
+  background:
+    linear-gradient(90deg, #102f2bdc, #102f2b70),
+    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  max-width: 700px;
+  line-height: 1.5;
+}
+
+.hero p {
+  font-size: 17px;
+  line-height: 1.9;
+  max-width: 650px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 35px auto;
+}
+
+.panel {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px #173a3010;
+  margin-bottom: 25px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: end;
+}
+
+label {
+  display: block;
+  margin-bottom: 9px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+select, input, button {
+  width: 100%;
+  padding: 13px;
+  border-radius: 9px;
+  border: 1px solid #d6e2dc;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+select, input {
+  background: #fff;
+  color: #19352e;
+}
+
+button {
+  background: #176b58;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #104c3e;
+}
+
+h2 {
+  margin-top: 35px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid #e1e9e4;
+  box-shadow: 0 4px 14px #173a300c;
+}
+
+.card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 18px;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card p {
+  color: #60736b;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 10px;
+  background: #e1f4e9;
+  color: #176b58;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.result {
+  display: none;
+  line-height: 1.9;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.weather-item {
+  padding: 17px;
+  background: #edf7f1;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.weather-item strong {
+  display: block;
+  font-size: 24px;
+  color: #176b58;
+  margin-bottom: 6px;
+}
+
+.notice {
+  background: #fff4db;
+  color: #77551a;
+  border-right: 4px solid #e8b74c;
+  border-radius: 8px;
+  padding: 15px;
+  line-height: 1.9;
+  margin-top: 20px;
+}
+
+footer {
+  background: #123d35;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  line-height: 1.9;
+  font-size: 13px;
+}
+
+@media (max-width: 750px) {
+  .filters, .cards, .weather-grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 7px 5px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <div class="logo">🏔️ مغامرات بهلاء والحمراء</div>
+    <p>اكتشف جمال الطبيعة وفق توقعات الطقس</p>
+  </div>
+
+  <nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#places">الوجهات</a>
+    <a href="#weather">الطقس والمغامرات</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>مغامرتك القادمة تبدأ من بهلاء والحمراء</h1>
+  <p>
+    اكتشف القلاع والقرى التاريخية والجبال والسماء المرصعة بالنجوم.
+    اختر وجهتك ونوع المغامرة، ودع توقعات الطقس تساعدك على التخطيط.
+  </p>
+</section>
+
+<main class="container">
+
+  <section class="panel" id="weather">
+    <h2>🌦️ اكتشف مغامرتك</h2>
+    <p>اختر إحدى الوجهات في بهلاء أو الحمراء فقط.</p>
+
+    <div class="filters">
+
+      <div>
+        <label for="place">الوجهة السياحية</label>
+        <select id="place">
+          <optgroup label="ولاية بهلاء">
+            <option value="bahla">قلعة بهلاء</option>
+            <option value="jabrin">حصن جبرين</option>
+            <option value="bilad">بلاد سيت</option>
+          </optgroup>
+
+          <optgroup label="ولاية الحمراء">
+            <option value="misfat">مسفاة العبريين</option>
+            <option value="oldhamra">قرية الحمراء القديمة</option>
+            <option value="shams">جبل شمس</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div>
+        <label for="activity">نوع المغامرة</label>
+        <select id="activity">
+          <option value="walking">المشي واستكشاف الطبيعة</option>
+          <option value="history">استكشاف المعالم التاريخية</option>
+          <option value="stars">مراقبة النجوم</option>
+          <option value="photo">تصوير الطبيعة</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="date">تاريخ المغامرة</label>
+        <input type="date" id="date">
+      </div>
+
+    </div>
+
+    <button onclick="discover()" id="discoverButton"
+      style="margin-top:18px">
+      🔎 اكتشف المغامرة المناسبة
+    </button>
+
+    <div class="result" id="result"></div>
+  </section>
+
+  <h2 id="places">📍 وجهات المغامرات</h2>
+
+  <p>
+    جميع الوجهات في هذا الموقع مخصصة لبهلاء والحمراء،
+    ولا توجد وجهات من ولايات أخرى ضمن القائمة.
+  </p>
+
+  <div class="cards">
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=800&q=80"
+           alt="معلم تاريخي">
+      <div class="card-content">
+        <span class="tag">ولاية بهلاء</span>
+        <h3>قلعة بهلاء</h3>
+        <p>
+          استكشف أحد أبرز المعالم التاريخية في عُمان،
+          وتعرّف على العمارة التقليدية والأسوار القديمة.
+        </p>
+        <button onclick="selectPlace('bahla')">اختر هذه الوجهة</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=800&q=80"
+           alt="حصن تاريخي">
+      <div class="card-content">
+        <span class="tag">ولاية بهلاء</span>
+        <h3>حصن جبرين</h3>
+        <p>
+          تجربة ثقافية لاستكشاف الحصن وتفاصيله المعمارية
+          وتاريخه العريق.
+        </p>
+        <button onclick="selectPlace('jabrin')">اختر هذه الوجهة</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
+           alt="جبال">
+      <div class="card-content">
+        <span class="tag">ولاية الحمراء</span>
+        <h3>جبل شمس</h3>
+        <p>
+          استمتع بالمشاهد الجبلية، واختر وقت المشي
+          بعد التحقق من الطقس وحالة المسارات.
+        </p>
+        <button onclick="selectPlace('shams')">اختر هذه الوجهة</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80"
+           alt="قرية جبلية">
+      <div class="card-content">
+        <span class="tag">ولاية الحمراء</span>
+        <h3>مسفاة العبريين</h3>
+        <p>
+          تجوّل بين الممرات والبيوت التقليدية
+          وتعرّف على نظام الأفلاج والزراعة القديمة.
+        </p>
+        <button onclick="selectPlace('misfat')">اختر هذه الوجهة</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=800&q=80"
+           alt="قرية تاريخية">
+      <div class="card-content">
+        <span class="tag">ولاية الحمراء</span>
+        <h3>قرية الحمراء القديمة</h3>
+        <p>
+          اكتشف البيوت الطينية والتراث المعماري
+          والحياة التقليدية في القرية.
+        </p>
+        <button onclick="selectPlace('oldhamra')">اختر هذه الوجهة</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+           alt="مناظر طبيعية">
+      <div class="card-content">
+        <span class="tag">ولاية بهلاء</span>
+        <h3>بلاد سيت</h3>
+        <p>
+          اكتشف المشاهد الطبيعية والقرية الجبلية،
+          بعد التأكد من طريق الوصول والظروف المحلية.
+        </p>
+        <button onclick="selectPlace('bilad')">اختر هذه الوجهة</button>
+      </div>
+    </article>
+
+  </div>
+
+</main>
+
+<footer>
+  <strong>مغامرات بهلاء والحمراء</strong>
+  <br>
+  وجهات محلية، وتجارب سياحية ترتبط بتوقعات الطقس.
+  <br>
+  بيانات الطقس إرشادية وليست ضمانًا لسلامة النشاط.
+  تحقق من التحذيرات الرسمية وحالة الطرق قبل الانطلاق،
+  وتجنب الأودية عند احتمال السيول.
+</footer>
+
+<script>
+const places = {
+  bahla: {
+    name: "قلعة بهلاء",
+    state: "ولاية بهلاء",
+    lat: 22.9644,
+    lon: 57.3000,
+    activity: "زيارة القلعة واستكشاف المعالم التاريخية"
+  },
+
+  jabrin: {
+    name: "حصن جبرين",
+    state: "ولاية بهلاء",
+    lat: 22.9075,
+    lon: 57.2447,
+    activity: "جولة ثقافية وتصوير العمارة التاريخية"
+  },
+
+  bilad: {
+    name: "بلاد سيت",
+    state: "وجهة تحتاج إلى التحقق من مسار الوصول",
+    lat: 23.1840,
+    lon: 57.3650,
+    activity: "استكشاف الطبيعة والقرى الجبلية"
+  },
+
+  misfat: {
+    name: "مسفاة العبريين",
+    state: "ولاية الحمراء",
+    lat: 23.1310,
+    lon: 57.3040,
+    activity: "المشي في القرية واستكشاف الأفلاج"
+  },
+
+  oldhamra: {
+    name: "قرية الحمراء القديمة",
+    state: "ولاية الحمراء",
+    lat: 23.1190,
+    lon: 57.2840,
+    activity: "جولة تراثية وتصوير البيوت القديمة"
+  },
+
+  shams: {
+    name: "جبل شمس",
+    state: "منطقة الجبل الغربي",
+    lat: 23.2360,
+    lon: 57.2620,
+    activity: "المشي الجبلي ومشاهدة المناظر الطبيعية"
+  }
+};
+
+const activities = {
+  walking: "المشي واستكشاف الطبيعة",
+  history: "استكشاف المعالم التاريخية",
+  stars: "مراقبة النجوم",
+  photo: "تصوير الطبيعة"
+};
+
+document.getElementById("date").value =
+  new Date().toLocaleDateString("en-CA");
+
+function selectPlace(key) {
+  document.getElementById("place").value = key;
+  document.getElementById("weather").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function describeWeather(code) {
+  if (code === 0) return "سماء صافية";
+  if ([1, 2].includes(code)) return "غائم جزئيًا";
+  if (code === 3) return "غائم";
+  if ([45, 48].includes(code)) return "ضباب";
+  if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) {
+    return "رذاذ أو أمطار";
+  }
+  if ([95, 96, 99].includes(code)) return "عواصف رعدية";
+  return "حالة جوية متغيرة";
+}
+
+async function discover() {
+  const key = document.getElementById("place").value;
+  const activityKey = document.getElementById("activity").value;
+  const date = document.getElementById("date").value;
+  const place = places[key];
+  const result = document.getElementById("result");
+  const button = document.getElementById("discoverButton");
+
+  result.style.display = "block";
+  result.innerHTML = "<p>جارٍ جلب بيانات الطقس...</p>";
+  button.disabled = true;
+
+  try {
+    const today = new Date().toLocaleDateString("en-CA");
+    const selectedDate = date || today;
+
+    const start = new Date(today + "T00:00:00");
+    const chosen = new Date(selectedDate + "T00:00:00");
+    const days = Math.round((chosen - start) / 86400000);
+
+    if (days < 0 || days > 15) {
+      throw new Error("اختر تاريخًا بين اليوم والأيام الخمسة عشر القادمة.");
+    }
+
+    const url =
+      "https://api.open-meteo.com/v1/forecast" +
+      "?latitude=" + place.lat +
+      "&longitude=" + place.lon +
+      "&daily=weather_code,temperature_2m_max,temperature_2m_min," +
+      "precipitation_probability_max,precipitation_sum,wind_speed_10m_max" +
+      "&forecast_days=16&timezone=Asia%2FMuscat";
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("تعذر الحصول على توقعات الطقس.");
+    }
+
+    const data = await response.json();
+    const i = data.daily.time.indexOf(selectedDate);
+
+    if (i === -1) {
+      throw new Error("لا تتوفر توقعات لهذا التاريخ.");
+    }
+
+    const d = data.daily;
+    const rainChance = d.precipitation_probability_max[i];
+    const rainAmount = d.precipitation_sum[i];
+    const maxTemp = d.temperature_2m_max[i];
+    const minTemp = d.temperature_2m_min[i];
+    const wind = d.wind_speed_10m_max[i];
+    const code = d.weather_code[i];
+
+    let advice = "تحقق من حالة الوجهة والمسار قبل الانطلاق.";
+
+    if (rainChance >= 40 || rainAmount >= 5) {
+      advice = "الأمطار محتملة. تجنب الأودية ومجاري السيول، وتحقق من التحذيرات الرسمية.";
+    } else if (maxTemp >= 38) {
+      advice = "الحرارة مرتفعة. فضّل الأنشطة القصيرة في وقت أبرد وتجنب الإجهاد الحراري.";
+    } else if (wind >= 35) {
+      advice = "الرياح قوية نسبيًا. راجع الظروف المحلية قبل الأنشطة في المناطق المكشوفة.";
+    } else if (activityKey === "stars" && [0, 1].includes(code)) {
+      advice = "قد تكون الأجواء مناسبة للرصد، لكن تحقق من الغيوم الفعلية وموعد غروب القمر والتلوث الضوئي.";
+    } else if (activityKey === "history") {
+      advice = "يمكن التخطيط لجولة تراثية، مع التأكد من أوقات فتح الموقع.";
+    } else if (activityKey === "photo") {
+      advice = "اختر وقت الشروق أو ما قبل الغروب للتصوير، وتحقق من حالة الإضاءة.";
+    } else if (activityKey === "walking") {
+      advice = "تحقق من حرارة النهار وحالة المسار وتوفر المياه قبل بدء المشي.";
+    }
+
+    result.innerHTML = `
+      <h2>نتيجة استكشاف ${place.name}</h2>
+      <p><strong>المنطقة:</strong> ${place.state}</p>
+      <p><strong>المغامرة المختارة:</strong> ${activities[activityKey]}</p>
+      <p><strong>التاريخ:</strong> ${selectedDate}</p>
+
+      <div class="weather-grid">
+        <div class="weather-item">
+          <strong>${maxTemp}°</strong>
+          أعلى درجة حرارة
+        </div>
+
+        <div class="weather-item">
+          <strong>${minTemp}°</strong>
+          أدنى درجة حرارة
+        </div>
+
+        <div class="weather-item">
+          <strong>${describeWeather(code)}</strong>
+          الحالة المتوقعة
+        </div>
+
+        <div class="weather-item">
+          <strong>${rainChance ?? "غير متاح"}%</strong>
+          احتمال الأمطار
+        </div>
+
+        <div class="weather-item">
+          <strong>${wind} كم/س</strong>
+          أقصى سرعة رياح متوقعة
+        </div>
+
+        <div class="weather-item">
+          <strong>${rainAmount} مم</strong>
+          كمية الأمطار المتوقعة
+        </div>
+      </div>
+
+      <h3>اقتراح المغامرة</h3>
+      <p>${place.activity}</p>
+
+      <h3>نصيحة حسب الطقس</h3>
+      <p>${advice}</p>
+
+      <div class="notice">
+        <strong>تنبيه السلامة:</strong>
+        هذه توقعات جوية وليست تحذيرات رسمية، ولا تضمن سلامة الموقع.
+        تحقق من الجهات الرسمية وحالة الطريق وإغلاق الوجهات.
+        لا تدخل الأودية عند احتمال السيول.
+      </div>
+
+      <p style="color:#60736b;font-size:13px">
+        المصدر: خدمة Open-Meteo لتوقعات الطقس.
+        التوقعات البعيدة قد تتغير.
+      </p>
+    `;
+
+  } catch (error) {
+    result.innerHTML =
+      "<p style='color:#b3261e'>" + error.message +
+      "<br>تحقق من الإنترنت والتاريخ ثم أعد المحاولة.</p>";
+  } finally {
+    button.disabled = false;
+  }
+}
+</script>
+
+</body>
+</html>
+```
